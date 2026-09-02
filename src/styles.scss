@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  --page: #ececec;
+  --surface: #f7f7f6;
+  --ink: #0b0b0c;
+  --muted: #5f5f64;
+  --blue: #315cff;
+  --pink: #f4caff;
+  --card-border: rgba(255, 255, 255, 0.86);
+  --radius-shell: 1.8rem;
+  --radius-card: 1.35rem;
+  --shadow-shell: 0 22px 55px rgba(38, 43, 54, 0.12);
+  --shadow-card: 0 12px 30px rgba(24, 25, 29, 0.06);
+  --max-width: 1120px;
+  font-family: 'DM Sans', Arial, sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--page);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: white;
+  background: var(--blue);
+}

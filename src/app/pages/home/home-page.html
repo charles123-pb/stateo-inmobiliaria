@@ -1,0 +1,184 @@
+<div class="page-frame">
+  <main>
+    <!-- BLOQUE 1: portada. La imagen y las tres partes del titulo vienen del Signal. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__visual">
+        <img
+          class="hero__image"
+          [src]="content().heroImageUrl"
+          alt="Modern dream house at blue hour"
+          (error)="useFallback($event, '/assets/hero-house.webp')"
+        />
+        <div class="hero__wash" aria-hidden="true"></div>
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__prefix">{{ content().heroPrefix }}</span>
+          <em>{{ content().heroAccent }}</em>
+          <span class="hero__suffix">{{ content().heroSuffix }}</span>
+        </h1>
+      </div>
+
+      <div class="services" aria-label="Estateo services">
+        <!-- @for crea una tarjeta por cada registro de la tabla services. -->
+        @for (service of content().services; track service.id) {
+          <app-service-card [service]="service" />
+        }
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: introduccion a las herramientas de la plataforma. -->
+    <section id="features" class="intro" aria-labelledby="features-title">
+      <span class="pill">{{ content().sectionBadge }}</span>
+      <h2 id="features-title">
+        {{ content().sectionTitle }}
+        <em>{{ content().sectionAccent }}</em>
+      </h2>
+      <p>{{ content().sectionDescription }}</p>
+    </section>
+
+    <!-- BLOQUE 3: cuadricula bento con capacidades, sostenibilidad e inversion. -->
+    <section class="bento" aria-label="Platform capabilities">
+      <!-- Estas tarjetas se generan con los registros de feature_cards. -->
+      @for (feature of content().features; track feature.id) {
+        <app-ui-card [variant]="feature.variant === 'collaboration' ? 'dark' : 'light'">
+          <article
+            class="feature-card"
+            [class.feature-card--dark]="feature.variant === 'collaboration'"
+          >
+            <div class="feature-card__copy">
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.description }}</p>
+            </div>
+
+            <!-- La variante decide si se dibuja una grafica o una red de personas. -->
+            @if (feature.variant === 'dashboard') {
+              <div class="market-panel" aria-label="Market trend preview">
+                <div class="market-panel__head">
+                  <span>{{ feature.eyebrow }}</span>
+                  <span class="more">•••</span>
+                </div>
+                <div class="chart">
+                  <span class="chart__value">$300K</span>
+                  <svg viewBox="0 0 380 145" role="img" aria-label="Rising market trend line">
+                    <path
+                      class="chart__area"
+                      d="M0,95 C35,100 55,50 90,58 C130,68 142,25 180,39 C225,56 245,115 290,73 C325,43 345,57 380,22 L380,145 L0,145 Z"
+                    />
+                    <path
+                      class="chart__line"
+                      d="M0,95 C35,100 55,50 90,58 C130,68 142,25 180,39 C225,56 245,115 290,73 C325,43 345,57 380,22"
+                    />
+                  </svg>
+                  <div class="chart__months"><span>Jan</span><span>Feb</span><span>Mar</span></div>
+                </div>
+              </div>
+            } @else {
+              <div class="collaboration-art" aria-label="Collaboration network preview">
+                <span class="orbit orbit--one"></span>
+                <span class="orbit orbit--two"></span>
+                <span class="orbit orbit--three"></span>
+                <span class="person person--one"><b>J</b> Jennifer Davis</span>
+                <span class="person person--two"><b>R</b> Robert Wilson</span>
+                <span class="person person--three"><b>E</b> Elizabeth Taylor</span>
+              </div>
+            }
+          </article>
+        </app-ui-card>
+      }
+
+      <!-- Tarjeta de viviendas sostenibles y sus precios dinamicos. -->
+      <app-ui-card variant="light">
+        <article class="sustainable-card">
+          <div class="sustainable-card__copy">
+            <span class="pill pill--white">{{ content().sustainableBadge }}</span>
+            <h3>{{ content().sustainableTitle }}</h3>
+            <p>{{ content().sustainableDescription }}</p>
+          </div>
+          <div class="sustainable-card__image-wrap">
+            <img
+              [src]="content().sustainableImageUrl"
+              alt="Sustainable community of smart homes"
+              (error)="useFallback($event, '/assets/sustainable-community.webp')"
+            />
+            <!-- $index vale 0, 1, 2... y se usa para colocar cada etiqueta. -->
+            @for (price of content().communityPrices; track $index) {
+              <span class="price-tag" [class]="'price-tag price-tag--' + ($index + 1)">{{
+                price
+              }}</span>
+            }
+          </div>
+        </article>
+      </app-ui-card>
+
+      <!-- Tarjeta de inversion. El grafico de barras es decorativo. -->
+      <app-ui-card variant="gradient">
+        <article class="investment-card">
+          <div class="investment-card__copy">
+            <h3>{{ content().investmentTitle }}</h3>
+            <p>{{ content().investmentDescription }}</p>
+            <a href="#top" class="dark-button">{{ content().investmentButton }}</a>
+          </div>
+          <div class="performance" aria-label="Portfolio performance preview">
+            <span class="performance__label">Lead Performing Agents</span>
+            <div class="agent-row agent-row--top">
+              <div class="agent-row__head">
+                <span><b>EG</b> Emily Gray</span><strong>$421,376</strong>
+              </div>
+              <div class="bars bars--green" aria-hidden="true">
+                @for (
+                  bar of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+                  track bar
+                ) {
+                  <i></i>
+                }
+              </div>
+            </div>
+            <div class="agent-row agent-row--bottom">
+              <div class="agent-row__head">
+                <span><b>BW</b> Bruce Walker</span><strong>$242,491</strong>
+              </div>
+              <div class="bars bars--blue" aria-hidden="true">
+                @for (
+                  bar of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+                  track bar
+                ) {
+                  <i></i>
+                }
+              </div>
+            </div>
+          </div>
+        </article>
+      </app-ui-card>
+    </section>
+  </main>
+
+  <!-- BLOQUE 4: pie de pagina. Los grupos y enlaces vienen de footer_links. -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <a class="brand" href="#top" aria-label="Estateo home">
+        <span class="brand__mark" aria-hidden="true"><i></i></span>
+        <span>{{ content().brandName }}</span>
+      </a>
+      <p>{{ content().brandTagline }}</p>
+      <div class="socials" aria-label="Social media">
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="Facebook">f</a>
+      </div>
+    </div>
+
+    <!-- Crea una columna de navegacion por cada grupo: Products, Customers, etc. -->
+    @for (group of content().footerGroups; track group.name) {
+      <nav class="footer__column" [attr.aria-label]="group.name">
+        <h2>{{ group.name }}</h2>
+        @for (link of group.links; track link.id) {
+          <a [href]="link.url">{{ link.label }}</a>
+        }
+      </nav>
+    }
+
+    <div class="footer__bottom">
+      <div><a href="#">Terms of Use</a><a href="#">Privacy Policy</a></div>
+      <span>{{ content().copyrightText }}</span>
+    </div>
+  </footer>
+</div>

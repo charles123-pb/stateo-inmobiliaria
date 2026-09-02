@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+:host.ui-card--light,
+:host.ui-card--glass {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.84);
+}
+
+:host.ui-card--glass {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(18px);
+}
+
+:host.ui-card--dark {
+  color: white;
+  background: linear-gradient(145deg, #3a3a3b, #1d1d1f);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:host.ui-card--gradient {
+  color: var(--ink);
+  background: linear-gradient(120deg, #ffe5ab 0%, #ffd7d2 46%, #e5caff 100%);
+}

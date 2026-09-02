@@ -1,0 +1,15 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  // Hereda las reglas estrictas definidas para todo el proyecto.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Carpeta temporal donde TypeScript deja el resultado de la compilacion.
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  // Compila todos los archivos TypeScript que pertenecen a src.
+  "include": ["src/**/*.ts"],
+  // Las pruebas se compilan con tsconfig.spec.json, no con esta configuracion.
+  "exclude": ["src/**/*.spec.ts"]
+}
